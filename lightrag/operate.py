@@ -207,7 +207,7 @@ async def _handle_entity_relation_summary(
     summary_max_tokens = global_config["summary_max_tokens"]
     force_llm_summary_on_merge = global_config["force_llm_summary_on_merge"]
 
-    current_list = description_list[:]  # Copy the list to avoid modifying original
+    current_list = [sanitize_text_for_encoding(d) for d in description_list if d]
     llm_was_used = False  # Track whether LLM was used during the entire process
 
     # Iterative map-reduce process
